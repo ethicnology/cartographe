@@ -1,0 +1,29 @@
+html, body, #map {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding:0;
+}
+
+#map{
+    z-index: 1;
+}
+
+#input {
+    z-index: 2;
+    position: absolute;
+    top: 1%;
+    left: 10%;
+    text-align: center;
+    background-color: grey;
+    resize: both;
+    overflow: auto;
+    border: solid;
+    padding: 1%;
+  }
+
+#info{
+    resize: none;
+    background-color:darkkhaki;
+    margin-bottom: 1%;
+}
