@@ -33,7 +33,7 @@ document.getElementById("btn-graph").onclick = function () {
         let polyline = [];
         polyline.push([nodes[column[0]].latitude, nodes[column[0]].longitude]);
         polyline.push([nodes[column[1]].latitude, nodes[column[1]].longitude]);
-        last_pos = L.polyline(polyline, { color: 'black' }).addTo(map);
+        last_pos = L.polyline(polyline, { color: 'blue' }).addTo(map);
       }
     }
     displayNodes(nodes)
