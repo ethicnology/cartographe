@@ -22,7 +22,7 @@ document.getElementById("btn-graph").onclick = function () {
   const graph = document.getElementById("textarea-graph").value;
   const file = graph.split("\n");
   let last_pos = null;
-  const nodes = {}
+  const nodes = {};
   for (const line of file) {
     const column = line.split("␟");
     if (column.length == 3) {
@@ -30,25 +30,28 @@ document.getElementById("btn-graph").onclick = function () {
       nodes[node] = { latitude: column[1], longitude: column[2] };
     }
     if (document.getElementById("links").checked == true) {
-    if (column.length == 2) {
+      if (column.length == 2) {
         let polyline = [];
         polyline.push([nodes[column[0]].latitude, nodes[column[0]].longitude]);
         polyline.push([nodes[column[1]].latitude, nodes[column[1]].longitude]);
-        last_pos = L.polyline(polyline, { color: 'blue' }).addTo(map);
+        last_pos = L.polyline(polyline, { color: "blue" }).addTo(map);
       }
     }
   }
-    if (document.getElementById("nodes").checked == true) {
-      displayNodes(nodes)
-    }
+  if (document.getElementById("nodes").checked == true) {
+    displayNodes(nodes);
+  }
 };
 
-function displayNodes(nodes){
+function displayNodes(nodes) {
   for (const node in nodes) {
-    const marker = L.circleMarker([nodes[node].latitude, nodes[node].longitude], {
-      renderer: myRenderer,
-      radius: 5,
-    }).addTo(map);
+    const marker = L.circleMarker(
+      [nodes[node].latitude, nodes[node].longitude],
+      {
+        renderer: myRenderer,
+        radius: 5,
+      },
+    ).addTo(map);
     marker.bindTooltip(node, { permanent: false, direction: "top" });
   }
 }
