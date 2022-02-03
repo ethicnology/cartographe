@@ -19,7 +19,7 @@ var myRenderer = L.canvas({ padding: 0.4 });
 const nodes = {};
 
 document.getElementById("btn-graph").onclick = function () {
-  const graph = document.getElementById("graph").value;
+  const graph = document.getElementById("textarea-graph").value;
   const file = graph.split("\n");
   let last_pos = null;
   const nodes = {}
@@ -29,6 +29,7 @@ document.getElementById("btn-graph").onclick = function () {
       const node = column[0];
       nodes[node] = { latitude: column[1], longitude: column[2] };
     }
+    if (document.getElementById("links").checked == true) {
     if (column.length == 2) {
         let polyline = [];
         polyline.push([nodes[column[0]].latitude, nodes[column[0]].longitude]);
@@ -36,8 +37,10 @@ document.getElementById("btn-graph").onclick = function () {
         last_pos = L.polyline(polyline, { color: 'blue' }).addTo(map);
       }
     }
-    displayNodes(nodes)
-  map.fitBounds(last_pos.getBounds());
+  }
+    if (document.getElementById("nodes").checked == true) {
+      displayNodes(nodes)
+    }
 };
 
 function displayNodes(nodes){

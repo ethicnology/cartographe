@@ -12,7 +12,7 @@ crossorigin=""/>
 <body>
 <div id="map"></div>
 <div id="input">
-<textarea id="graph" placeholder="graph" rows="20" cols="55">
+<textarea id="textarea-graph" placeholder="graph" rows="20" cols="55">
 1829061610␟48.8260051␟2.3474783
 21658501␟48.8279975␟2.3518307
 1829061667␟48.8265177␟2.3501273
@@ -41,6 +41,11 @@ node_id␟latitude␟longitude #represents a node
 node_id␟latitude␟longitude
 node_id␟node_id #represents a link between two nodes
 </textarea>
+<br/>
+<input type="checkbox" id="nodes" checked>
+<label for="scales">Nodes</label>
+<input type="checkbox" id="links" checked>
+<label for="scales">Links</label>
 <br/>
 <button id="btn-graph" type="button">DISPLAY</button> 
 
