@@ -63,26 +63,17 @@ function displayNodes(nodes) {
   }
 }
 
-// https://stackoverflow.com/a/30316500/16010394
 function haversineDistance(coords1, coords2) {
-  function toRad(x) {
-    return x * Math.PI / 180;
-  }
   var lon1 = coords1[0];
   var lat1 = coords1[1];
   var lon2 = coords2[0];
   var lat2 = coords2[1];
-  var R = 6356752; // m
+  var R = 6371008.7714; // IUGG mean earth radius
+  var dLat = (lat2 - lat1) * Math.PI / 180;
+  var dLon = (lon2 - lon1) * Math.PI / 180;
+  var a = 0.5 - Math.cos(dLat) / 2 +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+      (1 - Math.cos(dLon)) / 2;
 
-  var x1 = lat2 - lat1;
-  var dLat = toRad(x1);
-  var x2 = lon2 - lon1;
-  var dLon = toRad(x2);
-  var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
-      Math.sin(dLon / 2) * Math.sin(dLon / 2);
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  var d = R * c;
-
-  return d;
+  return (R * 2 * Math.asin(Math.sqrt(a)));
 }
