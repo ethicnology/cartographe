@@ -20,11 +20,11 @@ const nodes = {};
 
 document.getElementById("btn-graph").onclick = function () {
   const graph = document.getElementById("textarea-graph").value;
+  const separator = document.getElementById("separator").value;
   const file = graph.split("\n");
-  let last_pos = null;
   const nodes = {};
   for (const line of file) {
-    const column = line.split("␟");
+    const column = line.split(separator);
     if (column.length == 3) {
       const node = column[0];
       nodes[node] = { latitude: column[1], longitude: column[2] };
@@ -41,6 +41,12 @@ document.getElementById("btn-graph").onclick = function () {
   if (document.getElementById("nodes").checked == true) {
     displayNodes(nodes);
   }
+  const first = nodes[Object.keys(nodes)[0]];
+  const last = nodes[Object.keys(nodes)[Object.keys(nodes).length - 1]];
+  map.fitBounds([[first.latitude, first.longitude], [
+    last.latitude,
+    last.longitude,
+  ]]);
 };
 
 function displayNodes(nodes) {
