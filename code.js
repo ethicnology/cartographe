@@ -31,10 +31,12 @@ document.getElementById("btn-graph").onclick = function () {
     }
     if (document.getElementById("links").checked == true) {
       if (column.length == 2) {
-        let polyline = [];
-        polyline.push([nodes[column[0]].latitude, nodes[column[0]].longitude]);
-        polyline.push([nodes[column[1]].latitude, nodes[column[1]].longitude]);
-        last_pos = L.polyline(polyline, { color: "blue" }).addTo(map);
+        const source = [nodes[column[0]].latitude, nodes[column[0]].longitude];
+        const target = [nodes[column[1]].latitude, nodes[column[1]].longitude];
+        const polyline = [source, target];
+        const distance = haversineDistance(source, target);
+        const line = L.polyline(polyline, { color: "blue" }).addTo(map)
+          .bindTooltip(`${distance.toFixed(2)} m`, { sticky: true });
       }
     }
   }
@@ -51,13 +53,36 @@ document.getElementById("btn-graph").onclick = function () {
 
 function displayNodes(nodes) {
   for (const node in nodes) {
-    const marker = L.circleMarker(
+    L.circleMarker(
       [nodes[node].latitude, nodes[node].longitude],
       {
         renderer: myRenderer,
         radius: 5,
       },
-    ).addTo(map);
-    marker.bindTooltip(node, { permanent: false, direction: "top" });
+    ).addTo(map).bindTooltip(node);
   }
+}
+
+// https://stackoverflow.com/a/30316500/16010394
+function haversineDistance(coords1, coords2) {
+  function toRad(x) {
+    return x * Math.PI / 180;
+  }
+  var lon1 = coords1[0];
+  var lat1 = coords1[1];
+  var lon2 = coords2[0];
+  var lat2 = coords2[1];
+  var R = 6356752; // m
+
+  var x1 = lat2 - lat1;
+  var dLat = toRad(x1);
+  var x2 = lon2 - lon1;
+  var dLon = toRad(x2);
+  var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  var d = R * c;
+
+  return d;
 }
