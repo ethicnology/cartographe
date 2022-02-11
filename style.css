@@ -25,5 +25,9 @@ html, body, #map {
 #info{
     resize: none;
     background-color:darkkhaki;
-    margin-bottom: 1%;
+    margin: auto;
+    text-align: left;
+    resize: both;
+    width: 416px;
+    font-size: 13px;
 }

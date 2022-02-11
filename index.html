@@ -35,17 +35,18 @@ crossorigin=""/>
 1829061610␟1829061614
 21658501␟92192237</textarea>
 <br/>
-<textarea id="info" rows="5" cols="55" readonly>
-"␟" ASCII 31 (0x1F) separator is used.
-node_id␟latitude␟longitude #represents a node
-node_id␟latitude␟longitude
-node_id␟node_id #represents a link between two nodes
-</textarea>
+<div id="info" rows="3" cols="55" readonly>
+<b>node_id␟latitude␟longitude //represents a node
+node_id␟node_id //represents a link between two nodes
+default separator is "␟" unit separator ASCII 31</b>
+</div>
 <br/>
+<label for="separator">Separator:</label>
+<input id="separator" value="␟" size="1" minlength="1" maxlength="1">
 <input type="checkbox" id="nodes" checked>
-<label for="scales">Nodes</label>
+<label for="nodes">Nodes</label>
 <input type="checkbox" id="links" checked>
-<label for="scales">Links</label>
+<label for="links">Links</label>
 <br/>
 <button id="btn-graph" type="button">DISPLAY</button> 
 
