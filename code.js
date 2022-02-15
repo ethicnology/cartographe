@@ -34,9 +34,7 @@ document.getElementById("btn-graph").onclick = function () {
         const source = [nodes[column[0]].latitude, nodes[column[0]].longitude];
         const target = [nodes[column[1]].latitude, nodes[column[1]].longitude];
         const polyline = [source, target];
-        const distance = haversineDistance(source, target);
-        const line = L.polyline(polyline, { color: "blue" }).addTo(map)
-          .bindTooltip(`${distance.toFixed(2)} m`, { sticky: true });
+        L.polyline(polyline, { color: "blue" }).addTo(map);
       }
     }
   }
@@ -61,19 +59,4 @@ function displayNodes(nodes) {
       },
     ).addTo(map).bindTooltip(node);
   }
-}
-
-function haversineDistance(coords1, coords2) {
-  var lon1 = coords1[0];
-  var lat1 = coords1[1];
-  var lon2 = coords2[0];
-  var lat2 = coords2[1];
-  var R = 6371008.7714; // IUGG mean earth radius
-  var dLat = (lat2 - lat1) * Math.PI / 180;
-  var dLon = (lon2 - lon1) * Math.PI / 180;
-  var a = 0.5 - Math.cos(dLat) / 2 +
-    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-      (1 - Math.cos(dLon)) / 2;
-
-  return (R * 2 * Math.asin(Math.sqrt(a)));
 }
